@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Scrolling - Progress - bar</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="content">
+ 
+  <div id="intro">
+    <h2>Introduction</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At maiores possimus, ab ducimus dolorem quam cupiditate, laudantium voluptatibus ipsam sunt officiis facilis, vero quidem! Sit est, accusantium totam voluptate quia.lorem</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate ex molestias, odio vel asperiores ipsam vitae temporibus maiores? Explicabo architecto molestias libero placeat quibusdam natus aspernatur alias deserunt sint fugiat?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, rem? Reprehenderit id nisi temporibus, voluptates repellat quas dolor consequuntur alias nobis tempora, minus tempore porro beatae sint quasi facilis repellendus!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam porro maxime aliquid eos officiis et, amet laboriosam velit enim quidem tempora nulla, ipsum aliquam cum, reprehenderit maiores voluptas error aperiam.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto omnis modi maiores commodi. Voluptates earum cum a error. Hic doloribus debitis sit id, illum veritatis minus ipsum reprehenderit voluptates iste.</p>
+  </div>
+  <div id="part-1">
+    <h2>Part 1: Do this thing!</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis voluptatem neque molestiae, rem corporis facilis fugiat, aut repudiandae sunt qui, iure incidunt sit nesciunt! Iste quod vel, pariatur! Sunt, optio.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium earum officiis obcaecati eveniet fuga? Natus aut eum deserunt error, fugit officiis blanditiis molestiae esse quidem provident, repellendus aspernatur non vel.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, rem? Reprehenderit id nisi temporibus, voluptates repellat quas dolor consequuntur alias nobis tempora, minus tempore porro beatae sint quasi facilis repellendus!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam porro maxime aliquid eos officiis et, amet laboriosam velit enim quidem tempora nulla, ipsum aliquam cum, reprehenderit maiores voluptas error aperiam.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto omnis modi maiores commodi. Voluptates earum cum a error. Hic doloribus debitis sit id, illum veritatis minus ipsum reprehenderit voluptates iste.</p>
+  </div>
+  <div id="part-2">
+    <h2>Part 2: Do that other thing!</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, rem? Reprehenderit id nisi temporibus, voluptates repellat quas dolor consequuntur alias nobis tempora, minus tempore porro beatae sint quasi facilis repellendus!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam porro maxime aliquid eos officiis et, amet laboriosam velit enim quidem tempora nulla, ipsum aliquam cum, reprehenderit maiores voluptas error aperiam.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto omnis modi maiores commodi. Voluptates earum cum a error. Hic doloribus debitis sit id, illum veritatis minus ipsum reprehenderit voluptates iste.</p>
+  </div>
+   
+</div>
+<div class="progress">
+  <div class="wrapper">
+    <div class="bar">
+      <a href="#intro">Introduction</a>
+      <i class="icon-ok"></i>
+      <span></span>
+    </div>
+    <div class="bar">
+      <a href="#part-1">Part 1: Do this thing!</a>
+      <i class="icon-ok"></i>
+      <span></span>
+    </div>
+    <div class="bar">
+      <a href="#part-2">Part 2: Do that other thing!</a>
+      <i class="icon-ok"></i>
+      <span></span>
+    </div>
+  </div>
+</div>
+
+
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript">
+		var wrapper_top = $(".progress .wrapper").offset().top;
+			$(window).scroll(function (){
+			    var wrapper_height = $(".progress .wrapper").height();
+			 
+			    // Affixes Progress Bars
+			  var top = $(this).scrollTop();
+			    if (top > wrapper_top - 10) {
+			        $(".progress .wrapper").addClass("affix");
+			    }
+			    else {
+			        $(".progress .wrapper").removeClass("affix");
+			    }
+
+			    // Calculate each progress section
+			    $(".content div").each(function(i){
+			        var this_top = $(this).offset().top;
+			        var height = $(this).height();
+			        var this_bottom = this_top + height;
+			        var percent = 0;
+			 
+			        // Scrolled within current section
+			        if (top >= this_top && top <= this_bottom) {
+			            percent = ((top - this_top) / (height - wrapper_height)) * 100;
+			            if (percent >= 100) { 
+			                percent = 100; 
+			            $(".progress .wrapper .bar:eq("+i+") i").css("color", "#fff");
+			            }
+			            else {
+			                $(".progress .wrapper .bar:eq("+i+") i").css("color", "#36a7f3");                                   
+			            }
+			        }
+			        else if (top > this_bottom) {
+			            percent = 100;
+			            $(".progress .wrapper .bar:eq("+i+") i").css("color", "#fff");
+			        }
+			        console.log(i);
+			        $(".progress .wrapper .bar:eq("+i+") span").css("width", percent + "%");
+			    });
+			});
+	</script>	
+</body>
+</html>

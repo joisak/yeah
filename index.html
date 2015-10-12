@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JAVASCRIPT</title>
+</head>
+<body>
+	<h1>API</h1>
+	<script>
+
+	// var xhr = new XMLHttpRequest();
+	// xhr.open("GET", "http://www.codecademy.com/", false);
+	// xhr.send();
+
+	// console.log(xhr.status);
+	// console.log(xhr.statusText);
+
+	// var kottar = '{ "pet1" : {"blackhorse" : "arrowFuck", "animal" : "horse", "lastname" : "fatherFish"}, "pet2" : {"angerFucker" : "rageSucker", "largerThenFisting" : "unionman"}} ';
+
+	// var json = JSON.parse(kottar);
+	// console.log(json);
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "http://www.lastfm.com/2.0/?method=user.getrecenttracks&user=rj&api_key=2716701230e056321ef598407d964f0b", false);
+	xhr.send();
+
+	// console.log(xhr.status);
+	// console.log(xhr.statusText);
+
+	</script>
+</body>
+</html>

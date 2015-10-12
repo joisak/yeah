@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>WU TANG CLAAAAN</title>
+
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="RubberBand.js"></script>
+<link rel="stylesheet" href="RubberBand.css" type="text/css" />
+</head>
+<body>
+
+	<div id="RubberBandjs">
+	<div class="rband">
+		<img src="down-arrow.png" class="arrow" />
+		<img src="loading.gif" class="load" />
+		<h3 class="text"></h3>
+	</div>
+</div>
+	
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>
+
+	var RB = new RubberBand(function(e) {
+		
+		// make your call to AJAX or simply reload the page
+		location.reload();
+		
+		// don't forget to close RubberBand when you're done.
+		e.close();
+	});
+
+
+	var user = "joisak";
+	var api_key = "2716701230e056321ef598407d964f0b";
+
+
+	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user='+user+'&api_key='+ api_key +'&format=json', function(data) {
+    var items = [];
+
+
+    $.each(data, function(key, val) {
+    
+    	var trackInfo = val.track;
+    	console.log(trackInfo[0].image[3]["#text"]);
+
+
+	   
+
+    	for( i = 0 ; i < 10; i++)
+    	{   	
+   			items.push('<img src='+ trackInfo[i].image[3]["#text"] +'><p id="' + key + '">' + trackInfo[i].name + ' - '+ trackInfo[i].artist["#text"]+' 	</p>');
+  			
+  		}
+    });
+
+    $('<ul/>', {
+      'class': 'my-new-list',
+      html: items.join('')
+    }).appendTo('body');
+});
+
+	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user='+user+'&api_key='+ api_key +'&format=json', function(data) {
+    var items = [];
+
+
+    $.each(data, function(key, val){
+    	console.log(key);
+    	console.log(val.track[2].artist.name);
+
+    	for( i = 2 ; i < 12; i++)
+    	{   
+    		console.log(val.track[i].artist.name);	
+   			items.push('<img src='+ val.track[i].image[3]["#text"] +'><p id="top_' + key + '">' + val.track[i].name + ' - '+ val.track[i].artist.name +' 	</p>');
+  		}
+    	
+    });
+
+    $('<ul/>', {
+      'class': 'my-new-list',
+      html: items.join('')
+    }).appendTo('body');
+});
+</script>
+</body>
+</html>
